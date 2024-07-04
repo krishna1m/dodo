@@ -69,7 +69,7 @@ impl Store {
         &self,
         email: String,
     ) -> Result<User, Error> {
-        match sqlx::query("SELECT * from users 
+        match sqlx::query("SELECT * FROM users 
                                     WHERE email = $1")
             .bind(email)
             .map(|row: PgRow| User {
@@ -93,7 +93,7 @@ impl Store {
         &self,
         user_id: &UserId,
     ) -> Result<Balance, Error> {
-        match sqlx::query("SELECT balance from users 
+        match sqlx::query("SELECT balance FROM users 
                                     WHERE id = $1")
             .bind(user_id.0)
             .map(|row: PgRow| Balance(
@@ -198,9 +198,9 @@ impl Store {
         user_id: UserId,
     ) -> Result<Vec<TransactionResponse>, Error> {
         match sqlx::query(
-            "SELECT id, ttype, amt from transactions
-                 where user_id = $1
-                 limit 5"
+            "SELECT id, ttype, amt FROM transactions
+                 WHERE user_id = $1
+                 LIMIT 5"
         )
         .bind(user_id.0)
         .map(|row: PgRow| TransactionResponse {
