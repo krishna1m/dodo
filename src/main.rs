@@ -52,7 +52,7 @@ async fn main() {
         .and_then(routes::user::credit);
 
     let registration = warp::post()
-        .and(warp::path("registration"))
+        .and(warp::path("register"))
         .and(warp::path::end())
         .and(store_filter.clone())
         .and(warp::body::json())
