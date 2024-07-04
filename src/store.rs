@@ -200,6 +200,7 @@ impl Store {
         match sqlx::query(
             "SELECT id, ttype, amt FROM transactions
                  WHERE user_id = $1
+                 ORDER BY id DESC
                  LIMIT 5"
         )
         .bind(user_id.0)
