@@ -20,6 +20,20 @@ pub async fn get_transactions(
     }
 }
 
+pub async fn get_balance(
+    session: Session,
+    store: Store,
+) -> Result<impl warp::Reply, warp::Rejection> {
+    let user_id = session.user_id;
+    match store
+        .get_user_balance(&user_id)
+        .await
+    {
+        Ok(res) => Ok(warp::reply::json(&res)),
+        Err(e) => Err(warp::reject::custom(e)),
+    }
+}
+
 pub async fn debit(
     session: Session,
     store: Store,

@@ -34,6 +34,12 @@ async fn main() {
         .and(store_filter.clone())
         .and_then(routes::user::get_transactions);
 
+    let get_balance = warp::get()
+        .and(warp::path("balance"))
+        .and(warp::path::end())
+        .and(routes::authentication::auth())
+        .and(store_filter.clone())
+        .and_then(routes::user::get_balance);
 
     let create_debit = warp::post()
         .and(warp::path("debit"))
@@ -66,6 +72,7 @@ async fn main() {
         .and_then(routes::authentication::login);
 
     let routes = get_transactions
+        .or(get_balance)
         .or(create_debit)
         .or(create_credit)
         .or(registration)
