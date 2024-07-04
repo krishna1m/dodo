@@ -28,6 +28,9 @@ pub async fn get_balance(
     match store
         .get_user_balance(&user_id)
         .await
+        .map(|balance| Amount {
+            amount: balance.0,
+        })
     {
         Ok(res) => Ok(warp::reply::json(&res)),
         Err(e) => Err(warp::reject::custom(e)),
