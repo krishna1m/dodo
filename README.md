@@ -1,6 +1,8 @@
 # Dodo
 Simple backend service for managing transactions and user accounts.
 
+[Demo link](https://drive.google.com/file/d/1ME9LR-x3_noo4Pc3SZPssPYY8yJvK6Qu/view?usp=sharing)
+
 ## Prerequisites
 1. Make sure you have `cargo` installed.
 2. Make sure you have PostgreSQL installed and it is up and running. Try using PostgreSQL 15 or later.
